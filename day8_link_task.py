@@ -1,4 +1,5 @@
 ##### oops #####
+#### create the class and how  init mehod use and how to creae he bjec #####
 class student:
     def __init__(self,name):
         self.name=name
@@ -55,6 +56,8 @@ class Calculator:
 
 print(Calculator.calculate_sum(3,5)) # 8
 
+
+## static method 
 class Calculator:
   def __init__(self,type):
     self.type = type
@@ -91,4 +94,97 @@ print(player1.run())
 print(player1.catch_ball())
 print(player1.swing_bat())
 
-#### Polymorphism ####
+#### Encapulation ####
+
+class Bank:
+  def __init__(self,balance):
+     self._balance=balance
+  
+  #getter method
+  def get_balance(self):
+    return self._balance
+  
+  #setter
+  def def_deposit(self,amt):
+    if amt > 0:
+      self._balance += amt
+    else:
+      print("No Sufficient balance...")
+      
+account=Bank(40000)
+account.def_deposit(3999)
+print(f"your total amount is :{account.get_balance()}")
+
+
+####### Abstraction
+from abc import ABC,abstractmethod
+class Animal(ABC):
+  @abstractmethod
+  def sound(self):
+    pass
+  def eat(self):
+    print("Animal can be eat grass....")
+    
+class Dog(Animal):
+  def sound(self):
+    print("It is Dog i can be sund is  bho bho...")
+
+obj=Dog()
+obj.sound()
+obj.eat()
+
+
+#### super######
+class Parent:
+  def __init__(self,fname,lname):
+    self.fname=fname
+    self.lname=lname
+  
+  def property1(self):
+    print("Here define he paren propery..")
+
+class Child(Parent):
+  def __init__(self,fname,lname,value):
+    super().__init__(fname,lname)
+    self.grandParent=value
+    
+  def welcome(self):
+    print(f"hello {self.fname} and {self.lname}")
+  
+obj=Child("Khushi","Gohel",2000)
+obj.welcome()
+obj.property1()
+
+
+
+#####dundur mehd 
+class Sentence:
+  words = []
+
+  def add_word(self, word):
+    self.words.append(word)
+
+  def __len__(self):
+    return len(self.words)
+
+new_sentence = Sentence()
+new_sentence.add_word('Hello')
+new_sentence.add_word('World')
+print(len(new_sentence))
+
+##### Method Resolution Order #####
+class Employee:
+  secret_code = 'secret'
+
+class Manager(Employee):
+  secret_code = 'm123'
+
+class Accountant(Employee):
+  secret_code = 'a123'
+
+class Owner(Accountant,Manager):
+  pass
+
+person = Owner()
+print(person.secret_code) # a12
+print(Owner.mro())
